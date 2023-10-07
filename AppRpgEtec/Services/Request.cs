@@ -46,7 +46,7 @@ namespace AppRpgEtec.Services
             return result;
         }
 
-        public async Task<int> PutAysnc<TResult>(string uri, TResult data, string token)
+        public async Task<int> PutAsync<TResult>(string uri, TResult data, string token)
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -62,7 +62,7 @@ namespace AppRpgEtec.Services
             else return 0;
         }
 
-        public async Task<TResult> GetAysnc<TResult>(string uri, string token)
+        public async Task<TResult> GetAsync<TResult>(string uri, string token)
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -74,7 +74,7 @@ namespace AppRpgEtec.Services
         }
 
 
-        public async Task<int> DeleteAysnc(string uri, string token)
+        public async Task<int> DeleteAsync(string uri, string token)
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -84,6 +84,24 @@ namespace AppRpgEtec.Services
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 return int.Parse(serialized);
             else return 0;
+        }
+
+        public async Task<int> PostReturnIntTokenAsync<TResult>(string uri, TResult data, string token)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization
+                = new AuthenticationHeaderValue("Bearer", token);
+
+            var content = new StringContent(JsonConvert.SerializeObject(data));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = await httpClient.PostAsync(uri, content);
+
+            string serialized = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                return int.Parse(serialized);
+            else
+                return 0;
         }
     }
 }

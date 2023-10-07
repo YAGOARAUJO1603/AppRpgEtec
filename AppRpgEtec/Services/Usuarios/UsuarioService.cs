@@ -44,13 +44,13 @@ namespace AppRpgEtec.Services.Usuarios
         public async Task<int> PutAtualizarLocalizacaoAsync(Usuario u)
         {
             string urlComplementar = "/AtualizarLocalizacao";
-            var result = await _request.PutAysnc(apiUrlBase + urlComplementar, u, _token);
+            var result = await _request.PutAsync(apiUrlBase + urlComplementar, u, _token);
             return result;
         }
         public async Task<ObservableCollection<Usuario>> GetUsuariosAsync()
         {
             string urlComplementar = string.Format("{0}", "/GetAll");
-            ObservableCollection<Models.Usuario> listaUsuarios = await _request.GetAysnc<ObservableCollection<Models.Usuario>>(apiUrlBase + urlComplementar, _token);
+            ObservableCollection<Models.Usuario> listaUsuarios = await _request.GetAsync<ObservableCollection<Models.Usuario>>(apiUrlBase + urlComplementar, _token);
             return listaUsuarios;
         }
 
