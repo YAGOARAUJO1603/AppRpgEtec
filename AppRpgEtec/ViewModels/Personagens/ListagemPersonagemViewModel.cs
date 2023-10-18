@@ -13,18 +13,58 @@ namespace AppRpgEtec.ViewModels.Personagens
     public class ListagemPersonagemViewModel : BaseViewModel
     {
         private PersonagemService pService;
+        private Personagem personagemSelecionado;
         public ObservableCollection<Personagem> Personagens { get; set; }
         public ICommand NovoPersonagem { get; }
+        public ICommand RemoverPersonagemCommand { get; }
+
+
+
+        public async Task RemoverPersonagem(Personagem p)
+        {
+            try
+            {
+                if (await Application.Current.MainPage
+                    .DisplayAlert("Confirmaçao", $"Confirma a remoçao de {p.Nome}?", "Sim", "Não"))
+                {
+                    await pService.DeletePersonagemAsync(p.Id);
+
+                    await Application.Current.MainPage.DisplayAlert("Mensagem", "Personagem removido com sucesso", "Ok");
+
+                    _ = obterPersonagens();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Ops", ex.Message + "Detalhes" + ex.InnerException, "Ok");
+            }
+        }
+
+        public Personagem PersonagemSelecionado
+        {
+            get { return personagemSelecionado; }
+            set
+            {
+                if (value != null)
+                {
+
+                    personagemSelecionado = value;
+                    Shell.Current
+                        .GoToAsync($"cadPersonagemView?pId={personagemSelecionado.Id}");
+                }
+            }
+        }
 
         public ListagemPersonagemViewModel()
         {
             string token = Preferences.Get("UsuarioToken", string.Empty);
             pService = new PersonagemService(token);
             Personagens = new ObservableCollection<Personagem>();
-        
+
             _ = obterPersonagens();
 
             NovoPersonagem = new Command(async () => { await ExibirCadastroPersonagem(); });
+            RemoverPersonagemCommand = new Command<Personagem>(async (Personagem p) => { await RemoverPersonagem(p); });
         }
 
         public async Task obterPersonagens()
@@ -34,7 +74,7 @@ namespace AppRpgEtec.ViewModels.Personagens
                 Personagens = await pService.GetPersonagensAsync();
                 OnPropertyChanged(nameof(Personagens));
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Ops", ex.Message + " Detalhes: " + ex.InnerException, "Ok");
             }
@@ -46,7 +86,7 @@ namespace AppRpgEtec.ViewModels.Personagens
             {
                 await Shell.Current.GoToAsync("cadPersonagemView");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await Application.Current.MainPage
                     .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "Ok");

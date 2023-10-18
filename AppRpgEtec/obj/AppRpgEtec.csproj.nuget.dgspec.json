@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AppRpgEtec\\3DS\\Hugo\\AppRpgEtec\\AppRpgEtec.csproj": {}
+    "D:\\Projetos_DS\\RpgAPP\\AppRpgEtec\\AppRpgEtec.csproj": {}
   },
   "projects": {
-    "D:\\AppRpgEtec\\3DS\\Hugo\\AppRpgEtec\\AppRpgEtec.csproj": {
+    "D:\\Projetos_DS\\RpgAPP\\AppRpgEtec\\AppRpgEtec.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppRpgEtec\\3DS\\Hugo\\AppRpgEtec\\AppRpgEtec.csproj",
+        "projectUniqueName": "D:\\Projetos_DS\\RpgAPP\\AppRpgEtec\\AppRpgEtec.csproj",
         "projectName": "AppRpgEtec",
-        "projectPath": "D:\\AppRpgEtec\\3DS\\Hugo\\AppRpgEtec\\AppRpgEtec.csproj",
+        "projectPath": "D:\\Projetos_DS\\RpgAPP\\AppRpgEtec\\AppRpgEtec.csproj",
         "packagesPath": "C:\\Users\\etechas\\.nuget\\packages\\",
-        "outputPath": "D:\\AppRpgEtec\\3DS\\Hugo\\AppRpgEtec\\obj\\",
+        "outputPath": "D:\\Projetos_DS\\RpgAPP\\AppRpgEtec\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [

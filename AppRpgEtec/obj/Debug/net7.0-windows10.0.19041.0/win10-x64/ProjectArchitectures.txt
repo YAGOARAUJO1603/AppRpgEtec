@@ -1,1 +1,1 @@
-D:\AppRpgEtec\3DS\Hugo\AppRpgEtec\AppRpgEtec.csproj;x64
+D:\Projetos_DS\RpgAPP\AppRpgEtec\AppRpgEtec.csproj;x64
